@@ -28,7 +28,7 @@ jobs:
 
       # Step 3: Update Browserslist DB
       - name: Update Browserslist DB
-        run: npx update-browserslist-db@latest
+        run: npx browserslist@latest --update-db
 
       # Step 4: Build the project (disable CI to allow warnings)
       - name: Build the project
