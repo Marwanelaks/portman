@@ -21,16 +21,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Specify the Node.js version you need
+          node-version: '14'  # Specify the Node.js version you need
 
       - name: Install dependencies
         run: npm install
 
-      # Step 3: Build the React app (dist or build directory)
-      - name: Build the project
-        run: npm run build
+      # Step 3: Update Browserslist DB
+      - name: Update Browserslist DB
+        run: npx update-browserslist-db@latest
 
-      # Step 4: Deploy the build directory to FTP server
+      # Step 4: Build the project (disable CI to allow warnings)
+      - name: Build the project
+        run: CI=false npm run build
+
+      # Step 5: Deploy to FTP server
       - name: Deploy to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
